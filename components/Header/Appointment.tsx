@@ -199,12 +199,12 @@ export function DetailTab({ selectedDate, selectedTime }: any) {
       console.log("erorrda - addbooking function-appointment.tsx", error);
     }
   };
-
+  // mt-3  md:mt-11 md:mb-[97px]
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 w-10/12 justify-center mx-auto flex-col mt-3  md:mt-11 md:mb-[97px]"
+        className="space-y-8 w-10/12 mx-auto md:min-h-[373px] md:mt-8"
       >
         <FormField
           control={form.control}
