@@ -144,7 +144,7 @@ const Expired = ({
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <Scroll className="w-14 h-14 mb-4 text-gray-300" />
           <p className="text-gray-700 text-md font-normal mx-auto px-8">
-            You don't have any passed appointments.
+            You don&apos;t have any passed appointments.
           </p>
         </div>
       </div>
