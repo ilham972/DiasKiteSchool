@@ -52,9 +52,10 @@
 //     updated_at: "2024-03-21T17:10:01.563296+00:00",
 //   },
 // ];
+
 "use client";
 import React from "react";
-import { format } from "date-fns"; // Assuming you're using date-fns for date formatting
+import { format } from "date-fns";
 import { ScrollArea } from "../ui/scroll-area";
 import Cancelled from "../badges/cancelled";
 import Passed from "../badges/passed";
@@ -108,7 +109,7 @@ const Expired = ({
                 </div>
               ))
             ) : (
-              <div>you don't have any passed appointments</div>
+              <div>you don&apos;t have any passed appointments</div>
             )}
           </div>
         </section>
