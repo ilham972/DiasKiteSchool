@@ -80,11 +80,11 @@ function AuthForm() {
 
   return (
     <main className=" min-h-full  sm:min-h-screen flex justify-center items-center">
-      <div className="bg-white p-8 rounded-lg sm:shadow-md max-w-sm mx-auto pt-20 lg:pt-0">
-        <h1 className="text-2xl font-bold mb-2">
+      <div className="bg-white p-8 rounded-lg sm:shadow-md max-w-sm mx-auto pt-20 lg:pt-0 lg:w-full w-3/5">
+        <h1 className="text-xl md:text-2xl font-bold mb-2">
           {isSigningUp ? "Create an account" : "Sign in"}
         </h1>
-        <p className="mb-8">
+        <p className="mb-8 text-gray-800  text-sm lg:text-md ">
           {isSigningUp
             ? "Join us and enjoy your holiday."
             : "Welcome back! Please login to your account."}
@@ -98,7 +98,7 @@ function AuthForm() {
             Sign up
           </Button>
           <Button
-            className="flex-1"
+            className="flex-1 "
             variant={isSigningUp ? "ghost" : "outline"}
             onClick={() => setIsSigningUp(false)}
           >
@@ -171,20 +171,20 @@ function AuthForm() {
           </form>
         </Form>
 
-        <div className="flex items-center justify-between mb-6">
+        {/* <div className="flex items-center justify-between mb-6">
           <hr className="w-full" />
           <span className="px-4 text-xs">OR</span>
           <hr className="w-full" />
         </div>
         <div className="flex justify-between">
           <Button className="flex-1 mr-2" variant="outline">
-            {/* AppleIcon */}
+            
           </Button>
           <Button className="flex-1 mx-2" variant="outline">
-            {/* ChromeIcon */}google
+        
           </Button>
           <Button className="flex-1 ml-2" variant="outline">
-            {/* FacebookIcon */}
+   
           </Button>
         </div>
         <p className="text-center mt-6 text-sm">
@@ -199,7 +199,7 @@ function AuthForm() {
             Privacy Policy
           </a>
           .
-        </p>
+        </p> */}
       </div>
     </main>
   );

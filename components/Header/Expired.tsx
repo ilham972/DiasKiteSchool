@@ -138,12 +138,12 @@ const Expired = ({
     !Array.isArray(AllExpiredAppointments) ||
     AllExpiredAppointments.length === 0
   ) {
-    // Condition for no appointments
+    // Condition for no appointment
     return (
-      <div className="max-w-sm mb-[71px] mt-5 mx-auto bg-white shadow-lg rounded-lg overflow-hidden h-96 md:max-w-lg p-5 text-center border-4 border-gray-50 relative">
+      <div className="max-w-sm mb-[63px] md:mb-[71px]  mt-5 mx-auto bg-white shadow-lg rounded-lg overflow-hidden  h-96 md:max-w-lg p-5 text-center border-4 border-gray-50 relative">
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <Scroll className="w-14 h-14 mb-4 text-gray-300" />
-          <p className="text-gray-700 text-md font-normal mx-auto px-8">
+          <p className="text-gray-700 text-sm md:text-md font-normal mx-auto px-8">
             You don&apos;t have any passed appointments.
           </p>
         </div>
@@ -153,7 +153,7 @@ const Expired = ({
 
   // Condition for displaying appointments
   return (
-    <ScrollArea className="h-[475px] w-full rounded-md">
+    <ScrollArea className=" h-[467px]  md:h-[475px] w-full rounded-md">
       <main className="flex flex-col gap-6 p-4 md:py-6 md:px-0">
         <section className="w-full flex flex-col gap-6">
           <div className="grid gap-4">

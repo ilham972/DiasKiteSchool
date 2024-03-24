@@ -57,17 +57,10 @@ export function BottomManu({
       <DrawerTrigger
         onClick={() => {
           user &&
-            toast(
-              `Before book a call please ${(
-                <Link href="/login" className="text-primary underline">
-                  Login
-                </Link>
-              )}`,
-              {
-                position: "top-center",
-                duration: 5000,
-              }
-            );
+            toast("Before book a call please login", {
+              position: "top-center",
+              duration: 5000,
+            });
         }}
         className={buttonVariants({ size: "sm" })}
       >

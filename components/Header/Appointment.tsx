@@ -29,6 +29,8 @@ import { addBooking } from "@/server/add-booking";
 
 import Link from "next/link";
 import { toast } from "sonner";
+import { cn } from "@/lib/utils";
+import { PhoneInput } from "./PhoneInput";
 
 export const CalendarTab = ({ user, onDateSelect }: any) => {
   const [date, setDate] = useState(new Date());
@@ -101,7 +103,7 @@ export const TimeTab = ({ onTimeSelect, bookedTimes }: any) => {
 
   return (
     <div>
-      <div className="grid grid-cols-3 gap-4 px-6 mx-auto mt-9 mb-[31px]">
+      <div className="grid grid-cols-3 gap-4 px-6 mx-auto mt-9 mb-[31px] text-sm">
         {timeSlots.map((time, index) => {
           // Check if the time slot is booked
           const isBooked = bookedTimes.includes(time);
@@ -113,11 +115,14 @@ export const TimeTab = ({ onTimeSelect, bookedTimes }: any) => {
               size="sm"
               disabled={isBooked} // Disable the button if the time slot is booked
               className={
-                selectedTime === time
-                  ? "bg-blue-500 text-white"
-                  : isBooked
-                  ? "bg-gray-500 text-white"
-                  : "hover:bg-blue-100" // Add a different style for booked slots if desired
+                cn(
+                  "md:text-sm text-xs px-0 font-md",
+                  selectedTime === time
+                    ? "bg-blue-500 text-white text-xs md:text-sm"
+                    : isBooked
+                    ? "bg-gray-500 text-white text-xm md:text-sm"
+                    : "hover:bg-blue-100"
+                ) // Add a different style for booked slots if desired
               }
               onClick={() => handleTimeSelect(time)}
             >
@@ -226,7 +231,8 @@ export function DetailTab({ selectedDate, selectedTime }: any) {
             <FormItem>
               {/* <FormLabel>Phone Number</FormLabel> */}
               <FormControl>
-                <Input {...field} placeholder="Whats Up Number" />
+                {/* <Input {...field} placeholder="Whats Up Number" /> */}
+                <PhoneInput {...field} placeholder="Whats up Number" />
               </FormControl>
               <FormMessage>
                 {form.formState.errors.phoneNumber?.message}
@@ -253,10 +259,11 @@ export function DetailTab({ selectedDate, selectedTime }: any) {
             </FormItem>
           )}
         />
-
-        <Button className="w-full my-0 px-0 " type="submit">
-          Submit
-        </Button>
+        <DrawerClose className="w-full mb-0 pb-0">
+          <Button className="w-full mb-0 pb-0" type="submit">
+            Submit
+          </Button>
+        </DrawerClose>
       </form>
     </Form>
   );
@@ -335,7 +342,10 @@ export function Appointment({ user, AllUpcomingAppointmentsTimes = {} }: any) {
       <DrawerFooter className=" pb-0 md:pb-5 pt-5 ">
         {user ? (
           currentStep < 3 && (
-            <Button className="mx-auto w-11/12" onClick={handleContinue}>
+            <Button
+              className="mx-auto w-11/12 mb-3 md:mb-0"
+              onClick={handleContinue}
+            >
               Continue
             </Button>
           )
@@ -344,7 +354,6 @@ export function Appointment({ user, AllUpcomingAppointmentsTimes = {} }: any) {
             <Link
               href="/login"
               className={buttonVariants({
-                variant: "outline",
                 className: "px-0 mx-5",
               })}
             >
