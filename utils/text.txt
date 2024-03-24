@@ -1,0 +1,3 @@
+super now let's tackle another problem , i gave you appointment parent component already and now i have problem in calendar tab , i wan to make disable the date before current date, the calendar component already have an ability to select  current date as default date but what i want to disable the date before the today date, below i gave you calendar tab, 
+
+below i gave you calendar component before changing something in the calendar component be careful because this is not created by me , this is from another ui library
