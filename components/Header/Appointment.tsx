@@ -204,7 +204,7 @@ export function DetailTab({ selectedDate, selectedTime }: any) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 w-10/12 mx-auto min-h-screen md:min-h-[373px] md:mt-8"
+        className=" space-y-3 md:space-y-8 w-10/12 mx-auto h-auto pb-0 mb-0 md:min-h-[373px] md:mt-8"
       >
         <FormField
           control={form.control}
@@ -242,7 +242,7 @@ export function DetailTab({ selectedDate, selectedTime }: any) {
               {/* <FormLabel>Extra Note</FormLabel> */}
               <FormControl>
                 <Input
-                  className="h-12 pt-0 align-text-top"
+                  className="h-12 pt-0 align-text-top md:flex hidden"
                   {...field}
                   placeholder="Additional details(Optional)"
                 />
@@ -254,7 +254,7 @@ export function DetailTab({ selectedDate, selectedTime }: any) {
           )}
         />
 
-        <Button className="w-full" type="submit">
+        <Button className="w-full my-0 px-0 " type="submit">
           Submit
         </Button>
       </form>
@@ -332,7 +332,7 @@ export function Appointment({ user, AllUpcomingAppointmentsTimes = {} }: any) {
       <Step step={currentStep} />
 
       {renderStepComponent()}
-      <DrawerFooter className="pb-5 pt-5 ">
+      <DrawerFooter className=" pb-0 md:pb-5 pt-5 ">
         {user ? (
           currentStep < 3 && (
             <Button className="mx-auto w-11/12" onClick={handleContinue}>
