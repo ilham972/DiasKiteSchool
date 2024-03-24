@@ -12,6 +12,8 @@ import { useState } from "react";
 import Appointment from "./Appointment";
 import Receipt from "./Receipt";
 import Expired from "./Expired";
+import { toast } from "sonner";
+import Link from "next/link";
 
 export function BottomManu({
   user,
@@ -48,13 +50,30 @@ export function BottomManu({
         return null;
     }
   };
+  // md:min-h-[680px]
 
   return (
     <Drawer>
-      <DrawerTrigger className={buttonVariants({ size: "sm" })}>
+      <DrawerTrigger
+        onClick={() => {
+          user &&
+            toast(
+              `Before book a call please ${(
+                <Link href="/login" className="text-primary underline">
+                  Login
+                </Link>
+              )}`,
+              {
+                position: "top-center",
+                duration: 5000,
+              }
+            );
+        }}
+        className={buttonVariants({ size: "sm" })}
+      >
         Book A Call
       </DrawerTrigger>
-      <DrawerContent className="min-h-[640px]   md:min-h-[680px]">
+      <DrawerContent>
         <div className="mx-auto w-full max-w-sm  ">
           <DrawerHeader>
             <div className="flex flex-col items-center">

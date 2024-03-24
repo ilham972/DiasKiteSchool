@@ -35,15 +35,19 @@ export const CalendarTab = ({ user, onDateSelect }: any) => {
 
   // Call onDateSelect when the date changes
   const handleDateChange = (newDate: any) => {
+    if (!user) {
+      window.location.assign("/login");
+      toast("no user");
+    }
     setDate(newDate);
     onDateSelect(newDate);
   };
 
   return (
     <>
-      <DrawerTitle className="mt-3">Pick A Date</DrawerTitle>
+      {/* <DrawerTitle className="mt-3">Pick A Date</DrawerTitle> */}
 
-      {!user ? (
+      {/* {!user ? (
         <DrawerDescription className="text-xs mt-0">
           Before book a call please
           <span className="text-primary">
@@ -56,13 +60,13 @@ export const CalendarTab = ({ user, onDateSelect }: any) => {
         <DrawerDescription className="text-xs mt-0">
           welcome back {user.full_name}
         </DrawerDescription>
-      )}
-      <div className="inline-flex w-full justify-center">
+      )} */}
+      <div className="inline-flex w-full h-[363px] justify-center ">
         <Calendar
           mode="single"
           selected={date}
           onSelect={handleDateChange}
-          className="rounded-md border"
+          className="rounded-md border mt-3 px-7 "
         />
       </div>
     </>
@@ -97,7 +101,7 @@ export const TimeTab = ({ onTimeSelect, bookedTimes }: any) => {
 
   return (
     <div>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-4 px-6 mx-auto mt-9 mb-[31px]">
         {timeSlots.map((time, index) => {
           // Check if the time slot is booked
           const isBooked = bookedTimes.includes(time);
@@ -149,6 +153,13 @@ export function DetailTab({ selectedDate, selectedTime }: any) {
     },
   });
   const formatDateForServer = (date: any) => {
+    if (!(date instanceof Date)) {
+      console.error(
+        "Invalid date provided to formatDateToLocalISOString:",
+        date
+      );
+      return ""; // Return a sensible default or handle the error as appropriate
+    }
     const year = date.getFullYear();
     const month = date.getMonth() + 1; // getMonth() is zero-based
     const day = date.getDate();
@@ -191,13 +202,16 @@ export function DetailTab({ selectedDate, selectedTime }: any) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-8 w-10/12 justify-center mx-auto flex-col mt-3  md:mt-11 md:mb-[97px]"
+      >
         <FormField
           control={form.control}
           name="name"
           render={({ field }: any) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              {/* <FormLabel>Name</FormLabel> */}
               <FormControl>
                 <Input {...field} placeholder="John Doe" />
               </FormControl>
@@ -210,9 +224,9 @@ export function DetailTab({ selectedDate, selectedTime }: any) {
           name="phoneNumber"
           render={({ field }: any) => (
             <FormItem>
-              <FormLabel>Phone Number</FormLabel>
+              {/* <FormLabel>Phone Number</FormLabel> */}
               <FormControl>
-                <Input {...field} placeholder="134567890" />
+                <Input {...field} placeholder="Whats Up Number" />
               </FormControl>
               <FormMessage>
                 {form.formState.errors.phoneNumber?.message}
@@ -225,9 +239,13 @@ export function DetailTab({ selectedDate, selectedTime }: any) {
           name="extraNote"
           render={({ field }: any) => (
             <FormItem>
-              <FormLabel>Extra Note</FormLabel>
+              {/* <FormLabel>Extra Note</FormLabel> */}
               <FormControl>
-                <Input {...field} placeholder="Additional details" />
+                <Input
+                  className="h-12 pt-0 align-text-top"
+                  {...field}
+                  placeholder="Additional details(Optional)"
+                />
               </FormControl>
               <FormMessage>
                 {form.formState.errors.extraNote?.message}
@@ -235,9 +253,10 @@ export function DetailTab({ selectedDate, selectedTime }: any) {
             </FormItem>
           )}
         />
-        <DrawerClose>
-          <Button type="submit">Submit</Button>
-        </DrawerClose>
+
+        <Button className="w-full" type="submit">
+          Submit
+        </Button>
       </form>
     </Form>
   );
@@ -272,10 +291,12 @@ export function Appointment({ user, AllUpcomingAppointmentsTimes = {} }: any) {
 
   const handleDateSelected = (date: any) => {
     setSelectedDate(date);
+    // setCurrentStep(currentStep + 1);
   };
 
   const handleTimeSelected = (time: any) => {
     setSelectedTime(time);
+    // setCurrentStep(currentStep + 1);
   };
 
   const handleContinue = () => {
@@ -307,23 +328,32 @@ export function Appointment({ user, AllUpcomingAppointmentsTimes = {} }: any) {
   };
 
   return (
-    <DrawerFooter className="pt-0">
+    <>
       <Step step={currentStep} />
-      {renderStepComponent()}
-      {user ? (
-        currentStep < 3 && <Button onClick={handleContinue}>Continue</Button>
-      ) : (
-        <DrawerClose asChild>
-          <Link
-            href="/login"
-            className={buttonVariants({ variant: "default" })}
-          >
-            Continue
-          </Link>
-        </DrawerClose>
-      )}
 
-      <DrawerClose asChild>
+      {renderStepComponent()}
+      <DrawerFooter className="pb-5 pt-5 ">
+        {user ? (
+          currentStep < 3 && (
+            <Button className="mx-auto w-11/12" onClick={handleContinue}>
+              Continue
+            </Button>
+          )
+        ) : (
+          <DrawerClose asChild>
+            <Link
+              href="/login"
+              className={buttonVariants({
+                variant: "outline",
+                className: "px-0 mx-5",
+              })}
+            >
+              Continue
+            </Link>
+          </DrawerClose>
+        )}
+
+        {/* <DrawerClose asChild>
         <a
           href="https://wa.me/94766558873 "
           target="_blank"
@@ -335,8 +365,9 @@ export function Appointment({ user, AllUpcomingAppointmentsTimes = {} }: any) {
         >
           DM Now
         </a>
-      </DrawerClose>
-    </DrawerFooter>
+      </DrawerClose> */}
+      </DrawerFooter>
+    </>
   );
 }
 

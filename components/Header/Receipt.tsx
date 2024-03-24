@@ -564,6 +564,7 @@ import { Button } from "../ui/button";
 import { toast } from "sonner";
 import cancelAppointment from "@/server/cancel-appointment";
 import Upcoming from "../badges/upcoming";
+import { AlarmCheck } from "lucide-react";
 
 // Update the interface to include all keys from your provided object
 interface AppointmentDetails {
@@ -611,8 +612,14 @@ const Receipt = ({
       ? userUpcomingAppointments.message
       : "Receipt details not available.";
     return (
-      <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden md:max-w-lg p-5 text-center">
-        <p className="text-gray-800">{message}</p>
+      <div className="max-w-sm mb-[71px] mt-5 mx-auto bg-white shadow-lg rounded-lg overflow-hidden h-96 md:max-w-lg p-5 text-center border-4 border-destructive-foreground border-gray-300 relative">
+        <div className="absolute inset-0 flex flex-col items-center justify-center">
+          <AlarmCheck className="w-14 h-14 mb-4 text-gray-300" />{" "}
+          {/* Adjust size as needed */}
+          <p className="text-gray-700 text-md font-normal mx-auto px-7">
+            {message}
+          </p>
+        </div>
       </div>
     );
   }
@@ -646,7 +653,7 @@ const Receipt = ({
   }
 
   return (
-    <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden md:max-w-lg">
+    <div className="max-w-md h-96 mt-5 mb-[71px] mx-auto bg-white shadow-lg rounded-lg overflow-hidden md:max-w-lg">
       <div className="p-5">
         <div className="bg-gray-50 border p-4 pt-7 rounded-lg relative">
           <div className="absolute right-3 top-1">
