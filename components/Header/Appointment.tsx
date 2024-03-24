@@ -204,7 +204,7 @@ export function DetailTab({ selectedDate, selectedTime }: any) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 w-10/12 mx-auto md:min-h-[373px] md:mt-8"
+        className="space-y-8 w-10/12 mx-auto min-h-screen md:min-h-[373px] md:mt-8"
       >
         <FormField
           control={form.control}
