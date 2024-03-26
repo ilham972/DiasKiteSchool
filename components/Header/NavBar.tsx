@@ -48,7 +48,7 @@ async function Navbar() {
         <Link href="/" className="pt-2">
           {/* <Image src="/logo.svg" alt="logo" width={74} height={29} /> */}
           <span className="font-bold text-1xl">DIAS </span>
-          <span className="text-1xl font-extralight text-primary">
+          <span className="text-1xl text-green-50 font-extralight text-primary">
             KITE SCHOOL
           </span>
         </Link>

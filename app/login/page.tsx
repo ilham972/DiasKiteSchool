@@ -79,8 +79,8 @@ function AuthForm() {
   };
 
   return (
-    <main className=" min-h-full  sm:min-h-screen flex justify-center items-center">
-      <div className="bg-white p-8 rounded-lg sm:shadow-md max-w-sm mx-auto pt-20 lg:pt-0 lg:w-full w-3/5">
+    <main className=" min-h-full  max-container mt-16 flex justify-center items-center">
+      <div className="bg-white/90  p-8 rounded-xl sm:shadow-md sm:max-w-sm sm:mx-auto pt-10 lg:w-full w-full mx-9">
         <h1 className="text-xl md:text-2xl font-bold mb-2">
           {isSigningUp ? "Create an account" : "Sign in"}
         </h1>

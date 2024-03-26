@@ -7,7 +7,13 @@ import {
   DrawerHeader,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { CalendarRange, Clock, History } from "lucide-react";
+import {
+  Calendar,
+  CalendarDays,
+  CalendarRange,
+  Clock,
+  History,
+} from "lucide-react";
 import { useState } from "react";
 import Appointment from "./Appointment";
 import Receipt from "./Receipt";
@@ -56,15 +62,36 @@ export function BottomManu({
     <Drawer>
       <DrawerTrigger
         onClick={() => {
-          user &&
+          !user &&
             toast("Before book a call please login", {
               position: "top-center",
               duration: 5000,
             });
         }}
-        className={buttonVariants({ size: "sm" })}
+        className={buttonVariants({
+          variant: "outline",
+          className:
+            "rounded-5xl hidden py-1 sm:flex mx-3  text-green-90 lg:text-[16px] lg:font-[400] whitespace-nowrap  lg:px-8 lg:py-[23px] sm:py-5  sm:mx-5 ",
+        })}
       >
         Book A Call
+      </DrawerTrigger>
+      <DrawerTrigger
+        onClick={() => {
+          !user &&
+            toast("Before book a call please login", {
+              position: "top-center",
+              duration: 5000,
+            });
+        }}
+        className={buttonVariants({
+          variant: "ghost",
+
+          className:
+            "rounded-[1000px] mt-1  flex  sm:hidden mx-0 px-0  text-green-90 hover:bg-white/0",
+        })}
+      >
+        <Calendar size={34} strokeWidth={0.75} />
       </DrawerTrigger>
       <DrawerContent>
         <div className="mx-auto w-full max-w-sm  ">
@@ -72,7 +99,7 @@ export function BottomManu({
             <div className="flex flex-col items-center">
               {/* Tab buttons */}
 
-              <div className="inline-flex items-center justify-between gap-1 px-1 border rounded-xl ">
+              <div className="inline-flex items-center justify-between gap-1 px-1 py-1 border rounded-xl ">
                 <Button
                   variant={activeTab === "appointment" ? "default" : "ghost"}
                   size="sm"
