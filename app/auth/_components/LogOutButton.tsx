@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { logout } from "@/server/logout";
+import { logout } from "@/app/auth/_actions/logout";
 import { toast } from "sonner";
 
 import React from "react";
@@ -9,7 +9,7 @@ import React from "react";
 const LogOutButton = () => {
   return (
     <Button
-      className="sm:flex sm:px-4 border border-[#64CCC5] hover:text-white sm:text-white sm:border-none text-green-90 px-3 bg-background sm:bg-green-90 hover:bg-green-50 rounded-[1000px] text-xs md:text-sm lg:text-[16px] md:font-[380] lg:font-[400]  lg:px-8 lg:py-6 sm:py-[23px] "
+      className="sm:flex sm:px-4 border border-[#64CCC5] hover:text-white  text-green-90 px-3 bg-background hover:bg-green-50 rounded-[1000px] text-xs md:text-sm lg:text-[16px] md:font-[380] lg:font-[400]  lg:px-8 lg:py-6 sm:py-[23px] "
       variant="secondary"
       onClick={() => {
         // Display the toast message with the undo option

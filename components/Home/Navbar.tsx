@@ -2,18 +2,18 @@ import { NAV_LINKS } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
 
-import { TopManu } from "@/components/Header/TopManu";
 // import { Button, buttonVariants } from "@/components/ui/button";
 // import { NavManu } from "./NavManu";
 import { BottomManu } from "@/components/Header/bottomManu";
 import { Calendar, CalendarDays, List, LogIn } from "lucide-react";
 import { createClient } from "@/utils/supabase/server";
 import React from "react";
-import LogOutButton from "@/components/auth/LogOutButton";
+import LogOutButton from "@/app/auth/_components/LogOutButton";
 import { getAllUpcomingAppointmentsTimes } from "@/server/get-all-upcoming-appointments";
 import { getUserUpcomingAppointments } from "@/server/get-user's-upcoming-appointments";
 import { getAllExpiredAppointments } from "@/server/get-all-expired-appointments";
-import { buttonVariants } from "../ui/button";
+import { Button, buttonVariants } from "../ui/button";
+import { AuthModal } from "../../app/auth/_components/modal";
 
 async function Navbar() {
   const supabase = createClient();
@@ -70,16 +70,18 @@ async function Navbar() {
         {user ? (
           <LogOutButton />
         ) : (
-          <Link
-            href="/login"
-            className={buttonVariants({
-              variant: "secondary",
-              className:
-                " sm:flex sm:px-4 px-0 bg-green-90 hover:bg-green-50 rounded-[1000px] text-xs md:text-sm lg:text-[16px] md:font-[380] lg:font-[400]  lg:px-8 lg:py-6 sm:py-[23px]  ",
-            })}
-          >
-            Login
-          </Link>
+          // <Link
+          //   href="/login"
+          //   className={buttonVariants({
+          //     variant: "secondary",
+          //     className:
+          //       " sm:flex sm:px-4 px-0 bg-green-90 hover:bg-green-50 rounded-[1000px] text-xs md:text-sm lg:text-[16px] md:font-[380] lg:font-[400]  lg:px-8 lg:py-6 sm:py-[23px]  ",
+          //   })}
+          // >
+          //   Login
+          // </Link>
+
+          <AuthModal />
         )}
       </div>
     </nav>

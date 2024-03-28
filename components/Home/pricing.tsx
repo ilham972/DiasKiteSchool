@@ -2,7 +2,7 @@ import React from "react";
 
 const Pricing = () => {
   return (
-    <div className="max-container padding-container mt-20">
+    <div id="pricing" className="max-container padding-container mt-20">
       <div className="mx-auto max-w-lg text-center">
         <h2 className="text-3xl font-bold sm:text-5xl">Our Packages</h2>
 

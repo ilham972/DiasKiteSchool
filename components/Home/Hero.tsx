@@ -116,16 +116,17 @@ import { ChevronDown, MessageCircle } from "lucide-react";
 
 const Hero = () => {
   return (
-    <section>
+    <section id="hero">
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
-          <div className="relative h-64 overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full">
+          <div className="relative h-64 overflow-hidden shadow-xl shadow-green-50/20 md:shadow-2xl md:shadow-green-50/50 rounded-lg sm:h-80 lg:order-last lg:h-full">
             <Image
-              width={1000}
-              height={1000}
+              width={720}
+              height={958}
               alt=""
-              src="/img-2.png"
+              src="https://ajmrbhqvrlvegajrmqvy.supabase.co/storage/v1/object/public/gallery/photo_20_2024-03-26_19-28-43.jpg"
               className="absolute inset-0 h-full w-full object-cover"
+              loading="eager"
             />
           </div>
           {/* <div className="lg:py-24">

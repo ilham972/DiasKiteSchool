@@ -104,13 +104,13 @@ export const TimeTab = ({ onTimeSelect, bookedTimes }: any) => {
   return (
     <div>
       <div className="grid grid-cols-3 gap-4 px-6 mx-auto mt-9 mb-[31px] text-sm">
-        {timeSlots.map((time, index) => {
+        {timeSlots.map((time) => {
           // Check if the time slot is booked
           const isBooked = bookedTimes.includes(time);
 
           return (
             <Button
-              key={index}
+              key={time}
               variant="outline"
               size="sm"
               disabled={isBooked} // Disable the button if the time slot is booked

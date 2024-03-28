@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 
 const faqs = [
-  { question: "Question 1", answer: "Answer to question 1." },
-  { question: "Question 2", answer: "Answer to question 2." },
-  // Add more FAQs as needed
+  { id: "faq1", question: "Question 1", answer: "Answer to question 1." },
+  { id: "faq2", question: "Question 2", answer: "Answer to question 2." },
+  // Add more FAQs as needed, each with a unique `id`
 ];
 
 const FAQItem = ({ faq }: any) => {
@@ -53,8 +53,8 @@ const FAQSection = () => {
     <div className="max-w-4xl mx-auto mt-28 px-10">
       <h2 className="text-2xl font-bold mb-5 text-center">FAQ</h2>
       <div className="space-y-3">
-        {faqs.map((faq, index) => (
-          <FAQItem key={index} faq={faq} />
+        {faqs.map((faq) => (
+          <FAQItem key={faq.id} faq={faq} /> // Use `faq.id` as the key
         ))}
       </div>
     </div>

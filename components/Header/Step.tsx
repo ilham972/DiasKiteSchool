@@ -47,16 +47,23 @@
 
 // export default Step;
 import React from "react";
-import { cn } from "@/lib/utils"; // Adjust the import path accordingly
+
+const steps = [
+  { id: "date", title: "Date" },
+  { id: "time", title: "Time" },
+  { id: "details", title: "Details" },
+];
 
 const Step = ({ step }: any) => {
   return (
-    <div className=" inline-flex items-center">
+    <div className="inline-flex items-center">
       <h2 className="sr-only">Steps</h2>
       <div>
         <ol className="flex items-center gap-2 text-xs font-medium text-gray-500 sm:gap-4">
-          {[...Array(3)].map((_, index) => (
-            <li key={index} className="flex items-center">
+          {steps.map((stepItem, index) => (
+            <li key={stepItem.id} className="flex items-center">
+              {" "}
+              {/* Use stepItem.id instead of index */}
               {step > index ? (
                 // Completed Step
                 <span className="rounded bg-green-50 p-1.5 text-green-600">
@@ -76,32 +83,14 @@ const Step = ({ step }: any) => {
               ) : (
                 // Current or Future Step
                 <span
-                  className={cn(
-                    "rounded text-center p-1.5 font-bold",
+                  className={`rounded text-center p-1.5 font-bold ${
                     step === index
                       ? "bg-blue-50 text-blue-600"
-                      : "bg-gray-50 text-gray-600",
-                    "flex items-center justify-center gap-2"
-                  )}
+                      : "bg-gray-50 text-gray-600"
+                  } flex items-center justify-center gap-2`}
                 >
-                  {step === index ? (
-                    // Current Step
-                    <React.Fragment>
-                      <span className="text-[10px]">{index + 1}</span>
-                      <span>
-                        {index === 0
-                          ? "Date"
-                          : index === 1
-                          ? "Time"
-                          : "Details"}
-                      </span>
-                    </React.Fragment>
-                  ) : (
-                    // Future Step
-                    <React.Fragment>
-                      <span className="text-[10px]">{index + 1}</span>
-                    </React.Fragment>
-                  )}
+                  <span className="text-[10px]">{index + 1}</span>
+                  {step === index && <span>{stepItem.title}</span>}
                 </span>
               )}
             </li>

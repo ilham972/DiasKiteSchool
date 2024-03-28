@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+CREATE TYPE appointment_status AS ENUM ('Upcoming', 'Passed', 'Cancelled');
 
-## Getting Started
+CREATE TABLE IF NOT EXISTS appointments (
+id SERIAL PRIMARY KEY,
+user_id UUID REFERENCES auth.users NOT NULL,
+date DATE NOT NULL,
+time TIME NOT NULL,
+extra_note TEXT,
+status appointment_status NOT NULL DEFAULT 'Upcoming',
+is_completed BOOLEAN DEFAULT false,
+inserted_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
 
-First, run the development server:
+-- Enable Row-Level Security for the appointments table
+ALTER TABLE appointments ENABLE ROW LEVEL SECURITY;
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+-- Policy for users to view their own appointments
+CREATE POLICY "Users can view their own appointments" ON appointments
+FOR SELECT USING (
+auth.uid() = user_id
+);
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+-- Policy for users to add new bookings
+CREATE POLICY "Users can add new bookings" ON appointments
+FOR INSERT WITH CHECK (
+auth.uid() = user_id
+);
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+-- Policy for users to update their own bookings
+CREATE POLICY "Users can update their own bookings" ON appointments
+FOR UPDATE USING (
+auth.uid() = user_id AND status = 'Upcoming'
+);
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+-- Additional Policy: Allow users to cancel their own bookings
+-- Note: This might be redundant given your last policy, but ensure your update statement aligns with policy conditions.
+CREATE POLICY "Users can cancel their own bookings" ON appointments
+FOR UPDATE USING (
+auth.uid() = user_id
+) WITH CHECK (
+status = 'Cancelled'
+);
 
-## Learn More
+create table if not exists
+profile (
+id bigint primary key generated always as identity,
+user_id uuid references auth.users not null,
+name text not null,
+phone_number int not null,
+inserted_at timestamp with time zone default timezone ('utc'::text, now()) not null,
+foreign key (user_id) references auth.users
+);
 
-To learn more about Next.js, take a look at the following resources:
+alter table profile enable row level security;
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+create policy "Users can add their detail" on profile for insert
+with
+check (auth.uid () = user_id);
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+create policy "Users can view their own bookings" on profile
+for select using (auth.uid () = user_id);
 
-## Deploy on Vercel
+ALTER POLICY "Update appointment status to Cancelled." ON public.appointments
+FOR UPDATE
+TO auth.uid () USING (status = 'Cancelled')
+WITH
+CHECK (status IN ('Upcoming', 'Passed', 'Cancelled'));
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+alter table public.appointments
+alter column status
+set default 'Upcoming';

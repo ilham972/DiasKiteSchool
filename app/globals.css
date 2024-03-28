@@ -59,6 +59,7 @@
 } */
 
 /* @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Asap:wght@400;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -71,7 +72,11 @@
 }
 
 body {
-  font-family: Inter;
+  font-family: "Asap", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 @layer base {
@@ -287,4 +292,20 @@ body {
 .hide-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+/* Customizes the whole scrollbar */
+::-webkit-scrollbar {
+  width: 12px; /* width of the entire scrollbar */
+}
+
+/* Customizes the background of the scrollbar track */
+::-webkit-scrollbar-track {
+  background: bg-background; /* color of the tracking area */
+}
+
+/* Customizes the scrollbar handle */
+::-webkit-scrollbar-thumb {
+  background-color: #176b87; /* color of the scroll thumb */
+  border-radius: 6px; /* roundness of the scroll thumb */
+  border: 3px solid #f0f0f0; /* creates padding around the scroll thumb */
 }
