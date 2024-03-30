@@ -1,18 +1,11 @@
 import { NAV_LINKS } from "@/constants";
-import Image from "next/image";
 import Link from "next/link";
-
-// import { Button, buttonVariants } from "@/components/ui/button";
-// import { NavManu } from "./NavManu";
-import { BottomManu } from "@/components/Header/bottomManu";
-import { Calendar, CalendarDays, List, LogIn } from "lucide-react";
-import { createClient } from "@/utils/supabase/server";
-import React from "react";
 import LogOutButton from "@/app/auth/_components/LogOutButton";
+import { BottomManu } from "@/components/Header/bottomManu";
+import { getAllExpiredAppointments } from "@/server/get-all-expired-appointments";
 import { getAllUpcomingAppointmentsTimes } from "@/server/get-all-upcoming-appointments";
 import { getUserUpcomingAppointments } from "@/server/get-user's-upcoming-appointments";
-import { getAllExpiredAppointments } from "@/server/get-all-expired-appointments";
-import { Button, buttonVariants } from "../ui/button";
+import { createClient } from "@/utils/supabase/server";
 import { AuthModal } from "../../app/auth/_components/modal";
 
 async function Navbar() {
@@ -35,7 +28,6 @@ async function Navbar() {
     user,
   });
 
-  console.log("from navbar expirde appointment", AllExpiredAppointments);
   return (
     <nav className="flexBetween max-w-screen-xl mx-auto px-9 relative z-30 py-5">
       <Link href="/">
@@ -67,22 +59,7 @@ async function Navbar() {
             AllExpiredAppointments={AllExpiredAppointments}
           />
         </div>
-        {user ? (
-          <LogOutButton />
-        ) : (
-          // <Link
-          //   href="/login"
-          //   className={buttonVariants({
-          //     variant: "secondary",
-          //     className:
-          //       " sm:flex sm:px-4 px-0 bg-green-90 hover:bg-green-50 rounded-[1000px] text-xs md:text-sm lg:text-[16px] md:font-[380] lg:font-[400]  lg:px-8 lg:py-6 sm:py-[23px]  ",
-          //   })}
-          // >
-          //   Login
-          // </Link>
-
-          <AuthModal />
-        )}
+        {user ? <LogOutButton /> : <AuthModal />}
       </div>
     </nav>
   );
